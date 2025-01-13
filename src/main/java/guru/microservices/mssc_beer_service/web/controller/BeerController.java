@@ -15,7 +15,7 @@ public class BeerController {
 
     private final BeerService beerService;
 
-    BeerController(BeerService beerService){
+    public BeerController(BeerService beerService){
         this.beerService = beerService;
     }
 
