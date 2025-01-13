@@ -13,7 +13,7 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public BeerDTO getBeerById(UUID beerId) {
         return BeerDTO.builder()
-
+                .id(beerId)
                 .build();
     }
 
@@ -29,6 +29,8 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public BeerDTO saveNewBeer(BeerDTO beerDTO) {
-        return null;
+        return BeerDTO.builder()
+                .id(UUID.randomUUID())
+                .build();
     }
 }
