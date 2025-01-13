@@ -1,4 +1,4 @@
-package model;
+package guru.microservices.mssc_beer_service.web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
