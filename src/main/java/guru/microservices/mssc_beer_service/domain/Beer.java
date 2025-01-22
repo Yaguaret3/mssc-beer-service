@@ -22,7 +22,7 @@ public class Beer {
     private UUID id;
     @Version
     private Long version;
-    
+
     private String beerName;
     private String beerStyle;
     @Column(unique = true)
