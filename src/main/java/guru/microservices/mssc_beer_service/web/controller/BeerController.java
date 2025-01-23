@@ -2,9 +2,11 @@ package guru.microservices.mssc_beer_service.web.controller;
 
 import guru.microservices.mssc_beer_service.service.BeerService;
 import guru.microservices.mssc_beer_service.web.model.BeerDTO;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -24,7 +26,7 @@ public class BeerController {
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<Void> saveNewBeer(@RequestBody BeerDTO beerDTO){
+    public ResponseEntity<Void> saveNewBeer(@Validated @RequestBody BeerDTO beerDTO){
         BeerDTO beerCreated = beerService.saveNewBeer(beerDTO);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", String.format("/api/v1/beer/$s", beerCreated.getId().toString()));
@@ -32,7 +34,7 @@ public class BeerController {
     }
     @PutMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBeer(@PathVariable UUID beerId, @RequestBody BeerDTO beerDTO){
+    public void updateBeer(@PathVariable UUID beerId, @Validated @RequestBody BeerDTO beerDTO){
         beerService.updateBeer(beerId, beerDTO);
     }
     /*@DeleteMapping("/{beerId}")
