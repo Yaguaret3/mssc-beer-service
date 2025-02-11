@@ -3,6 +3,7 @@ package guru.microservices.mssc_beer_service.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.microservices.mssc_beer_service.service.BeerService;
 import guru.microservices.mssc_beer_service.web.model.BeerDTO;
+import guru.microservices.mssc_beer_service.web.model.BeerStyleEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -10,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -38,8 +40,8 @@ class BeerControllerTest {
     @Test
     void saveNewBeer() throws Exception {
 
-        BeerDTO beerDTO = BeerDTO.builder().id(UUID.randomUUID()).build();
-        given(service.saveNewBeer(any())).willReturn(beerDTO);
+        BeerDTO beerDTO = validBeerDTO();
+        given(service.saveNewBeer(any())).willReturn(BeerDTO.builder().id(UUID.randomUUID()).build());
 
         String beerDtoJson = objectMapper.writeValueAsString(beerDTO);
 
@@ -52,12 +54,21 @@ class BeerControllerTest {
     @Test
     void updateBeer() throws Exception {
 
-        BeerDTO beerDTO = BeerDTO.builder().id(UUID.randomUUID()).build();
+        BeerDTO beerDTO = validBeerDTO();
         String beerDtoJson = objectMapper.writeValueAsString(beerDTO);
 
-        mockMvc.perform(put("/api/v1/beer/" + beerDTO.getId().toString())
+        mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID())
                         .content(beerDtoJson)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
+    }
+
+    private BeerDTO validBeerDTO(){
+        return BeerDTO.builder()
+                .beerName("My beer")
+                .beerStyle(BeerStyleEnum.ALE)
+                .price(new BigDecimal("2.99"))
+                .upc(123123123123L)
+                .build();
     }
 }
