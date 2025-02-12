@@ -3,6 +3,7 @@ package guru.microservices.mssc_beer_service.web.controller;
 import guru.microservices.mssc_beer_service.service.BeerService;
 import guru.microservices.mssc_beer_service.web.model.BeerDTO;
 
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +35,8 @@ public class BeerController {
     }
     @PutMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBeer(@PathVariable UUID beerId, @Validated @RequestBody BeerDTO beerDTO){
-        beerService.updateBeer(beerId, beerDTO);
+    public BeerDTO updateBeer(@PathVariable UUID beerId, @Validated @RequestBody BeerDTO beerDTO) throws ChangeSetPersister.NotFoundException {
+        return beerService.updateBeer(beerId, beerDTO);
     }
     /*@DeleteMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
