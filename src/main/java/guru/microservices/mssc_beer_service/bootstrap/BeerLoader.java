@@ -11,6 +11,10 @@ import java.util.Arrays;
 @Component
 public class BeerLoader implements CommandLineRunner {
 
+    public static final String BEER_UPC_1 = "000112312331";
+    public static final String BEER_UPC_2 = "000112312332";
+    public static final String BEER_UPC_3 = "000112312333";
+
     private final IBeerRepository beerRepository;
 
     BeerLoader(IBeerRepository beerRepository) {
@@ -30,7 +34,7 @@ public class BeerLoader implements CommandLineRunner {
                                     .beerStyle("IPA")
                                     .quantityOnBrew(200)
                                     .minOnHand(12)
-                                    .upc(337010000001L)
+                                    .upc(BEER_UPC_1)
                                     .price(new BigDecimal("12.95"))
                                     .build(),
                             Beer.builder()
@@ -38,8 +42,16 @@ public class BeerLoader implements CommandLineRunner {
                                     .beerStyle("PALE_ALE")
                                     .quantityOnBrew(200)
                                     .minOnHand(12)
-                                    .upc(337010000002L)
+                                    .upc(BEER_UPC_2)
                                     .price(new BigDecimal("11.95"))
+                                    .build(),
+                            Beer.builder()
+                                    .beerName("No Hammer in this Bar")
+                                    .beerStyle("PALE_ALE")
+                                    .quantityOnBrew(200)
+                                    .minOnHand(12)
+                                    .upc(BEER_UPC_3)
+                                    .price(new BigDecimal("10.85"))
                                     .build())
             );
         }

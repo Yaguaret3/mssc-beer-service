@@ -23,7 +23,7 @@ public class BeerController {
     }
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDTO> getBeerById(@PathVariable UUID beerId){
+    public ResponseEntity<BeerDTO> getBeerById(@PathVariable UUID beerId) throws ChangeSetPersister.NotFoundException {
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
     @PostMapping

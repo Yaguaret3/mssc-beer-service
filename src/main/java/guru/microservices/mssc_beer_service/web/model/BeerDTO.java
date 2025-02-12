@@ -33,8 +33,7 @@ public class BeerDTO {
     private Long quantityOnHand;
 
     @NotNull
-    @Positive
-    private Long upc;
+    private String upc;
     @NotNull
     @Positive
     @JsonFormat(shape = JsonFormat.Shape.STRING)
