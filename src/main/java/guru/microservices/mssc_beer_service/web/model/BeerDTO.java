@@ -1,5 +1,6 @@
 package guru.microservices.mssc_beer_service.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
@@ -36,9 +37,11 @@ public class BeerDTO {
     private Long upc;
     @NotNull
     @Positive
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
 
     @Null
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime createdDate;
     @Null
     private OffsetDateTime lasModifiedDate;
